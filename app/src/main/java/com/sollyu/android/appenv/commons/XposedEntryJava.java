@@ -8,6 +8,7 @@
 
 package com.sollyu.android.appenv.commons;
 
+import android.app.AndroidAppHelper;
 import android.content.pm.ApplicationInfo;
 import android.content.res.Configuration;
 import android.content.res.Resources;
@@ -69,7 +70,7 @@ public class XposedEntryJava implements IXposedHookLoadPackage {
                 break;
 
             // 检查内置存储
-            xposedSettingsFile = new File(Environment.getDataDirectory(), "data/" + BuildConfig.APPLICATION_ID + "/files/appenv.xposed.json");
+            xposedSettingsFile = new File(AndroidAppHelper.currentApplication().getPackageManager().getPackageInfo(BuildConfig.APPLICATION_ID, 0) + "/files/appenv.xposed.json");
             if (xposedSettingsFile.exists() && xposedSettingsFile.canRead())
                 break;
 
